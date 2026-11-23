@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sabedoria Popular: O Segredo dos Antigos — jogo educativo sobre cultura, sustentabilidade e conhecimentos tradicionais.">
+    <meta name="theme-color" content="#254b38">
+    <title>Sabedoria Popular: O Segredo dos Antigos</title>
+
+    <!-- CSS será criado em style.css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- JavaScript será criado em script.js -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="site-header" id="topo">
+        <div class="brand">
+            <p class="brand__eyebrow">Uma aventura educativa</p>
+            <h1 class="brand__title">Sabedoria Popular</h1>
+            <p class="brand__subtitle">O Segredo dos Antigos</p>
+        </div>
+        <nav class="main-navigation" aria-label="Navegação principal">
+            <button class="button button--secondary" id="btn-ajuda" type="button">Como jogar</button>
+            <button class="button button--secondary" id="btn-livro" type="button">
+                Livro dos Saberes <span class="counter" id="contador-paginas">0/4</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="game-main" id="conteudo-principal">
+        <!-- Tela inicial -->
+        <section class="screen screen--active start-screen" id="tela-inicial" aria-labelledby="titulo-inicial">
+            <div class="start-screen__content">
+                <p class="section-eyebrow">Prepare-se para explorar</p>
+                <h2 id="titulo-inicial">O conhecimento vive em cada geração</h2>
+                <p>Explore uma comunidade, converse com seus moradores e descubra como os saberes tradicionais podem ajudar a cuidar da cultura e da natureza.</p>
+                <div class="start-screen__actions">
+                    <button class="button button--primary" id="btn-iniciar" type="button">Começar aventura</button>
+                    <button class="button button--secondary" id="btn-instrucoes-inicial" type="button">Como jogar</button>
+                </div>
+            </div>
+            <div class="start-screen__art" id="arte-capa" role="img" aria-label="Espaço reservado para a ilustração da vila"></div>
+        </section>
+
+        <!-- Instruções -->
+        <section class="screen instructions-screen" id="tela-instrucoes" aria-labelledby="titulo-instrucoes" hidden>
+            <div class="section-heading">
+                <p class="section-eyebrow">Guia do aventureiro</p>
+                <h2 id="titulo-instrucoes">Como jogar</h2>
+                <p>Use os controles para explorar os cenários e aprender com os moradores.</p>
+            </div>
+            <ul class="instructions-list">
+                <li><strong>Setas do teclado ou W A S D:</strong> movimentam o personagem.</li>
+                <li><strong>Espaço ou Enter:</strong> avança diálogos e confirma escolhas.</li>
+                <li><strong>Converse com os moradores:</strong> aproxime-se deles para descobrir novos saberes.</li>
+                <li><strong>Complete as missões:</strong> reúna as quatro páginas do Livro dos Saberes.</li>
+                <li><strong>Responda ao quiz:</strong> teste o que aprendeu no final da aventura.</li>
+            </ul>
+            <button class="button button--primary" id="btn-voltar-instrucoes" type="button">Voltar ao início</button>
+        </section>
+
+        <!-- Área principal da aventura -->
+        <section class="screen game-screen" id="tela-jogo" aria-labelledby="titulo-fase" hidden>
+            <div class="game-toolbar">
+                <div class="game-toolbar__location">
+                    <p class="section-eyebrow">Local atual</p>
+                    <h2 id="titulo-fase">Vila dos Saberes</h2>
+                </div>
+                <div class="game-toolbar__stats" aria-label="Progresso da aventura">
+                    <p>Pontuação: <strong id="pontuacao">0</strong></p>
+                    <p>Missão: <strong id="progresso-missao">1 de 4</strong></p>
+                </div>
+            </div>
+
+            <!-- Cenário, personagens e jogador -->
+            <div class="game-world" id="mundo-jogo" aria-label="Área de exploração do jogo" tabindex="0">
+                <div class="game-world__background" id="cenario-atual" role="img" aria-label="Cenário atual da aventura"></div>
+                <div class="game-world__characters" id="personagens-cenario">
+                    <!-- O JavaScript poderá inserir moradores e objetos interativos aqui. -->
+                    <div class="player" id="jogador" role="img" aria-label="Personagem do jogador">
+                        <span class="player__sprite" id="sprite-jogador"></span>
+                    </div>
+                </div>
+                <div class="game-world__prompt" id="dica-interacao" aria-live="polite">
+                    Explore o cenário e aproxime-se de um morador.
+                </div>
+            </div>
+
+            <div class="game-panels">
+                <aside class="panel mission-panel" id="painel-missao" aria-labelledby="titulo-missao">
+                    <div class="panel__header">
+                        <h3 id="titulo-missao">Missão atual</h3>
+                        <span class="panel__icon" aria-hidden="true">✦</span>
+                    </div>
+                    <p id="descricao-missao">Converse com os moradores para descobrir como os conhecimentos são passados entre gerações.</p>
+                    <p class="mission-panel__status" id="estado-missao" aria-live="polite">Missão em andamento</p>
+                </aside>
+
+                <aside class="panel inventory-panel" id="painel-inventario" aria-labelledby="titulo-inventario">
+                    <div class="panel__header">
+                        <h3 id="titulo-inventario">Livro dos Saberes</h3>
+                        <span class="counter" id="inventario-paginas">0/4 páginas</span>
+                    </div>
+                    <p id="mensagem-inventario">As páginas que você encontrar aparecerão aqui.</p>
+                    <ul class="page-list" id="lista-paginas" aria-label="Páginas coletadas">
+                        <li class="page-list__item" data-page="1">1. Saberes da comunidade <span>Não encontrada</span></li>
+                        <li class="page-list__item" data-page="2">2. Cuidado com a terra <span>Não encontrada</span></li>
+                        <li class="page-list__item" data-page="3">3. Tradições à mesa <span>Não encontrada</span></li>
+                        <li class="page-list__item" data-page="4">4. Segredos da natureza <span>Não encontrada</span></li>
+                    </ul>
+                </aside>
+            </div>
+
+            <!-- Caixa de diálogo reutilizável para os personagens -->
+            <section class="dialogue-box" id="caixa-dialogo" aria-labelledby="nome-personagem" aria-live="polite" hidden>
+                <div class="dialogue-box__portrait" id="retrato-personagem" role="img" aria-label="Retrato do personagem"></div>
+                <div class="dialogue-box__content">
+                    <h3 class="dialogue-box__name" id="nome-personagem">Morador da vila</h3>
+                    <p class="dialogue-box__text" id="texto-dialogo">Olá! Tenho um conhecimento para compartilhar com você.</p>
+                    <div class="dialogue-box__choices" id="opcoes-dialogo">
+                        <!-- Opções de resposta serão inseridas pelo JavaScript. -->
+                    </div>
+                    <div class="dialogue-box__actions">
+                        <button class="button button--primary" id="btn-avancar-dialogo" type="button">Continuar</button>
+                        <button class="button button--secondary" id="btn-fechar-dialogo" type="button">Fechar diálogo</button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="game-notification" id="notificacao-jogo" role="status" aria-live="polite" hidden>
+                <p id="texto-notificacao"></p>
+            </div>
+        </section>
+
+        <!-- Livro dos Saberes -->
+        <section class="screen book-screen" id="tela-livro" aria-labelledby="titulo-livro" hidden>
+            <div class="section-heading">
+                <p class="section-eyebrow">Seu registro de descobertas</p>
+                <h2 id="titulo-livro">Livro dos Saberes</h2>
+                <p>Reúna as páginas e relembre o que aprendeu durante a aventura.</p>
+            </div>
+            <div class="book-grid" id="conteudo-livro">
+                <article class="book-page" data-page="1">
+                    <h3>Saberes da comunidade</h3>
+                    <p>Os conhecimentos populares são compartilhados entre pessoas e gerações.</p>
+                    <span class="book-page__status">Ainda não encontrada</span>
+                </article>
+                <article class="book-page" data-page="2">
+                    <h3>Cuidado com a terra</h3>
+                    <p>O cultivo responsável e a compostagem podem ajudar a reduzir o desperdício.</p>
+                    <span class="book-page__status">Ainda não encontrada</span>
+                </article>
+                <article class="book-page" data-page="3">
+                    <h3>Tradições à mesa</h3>
+                    <p>Receitas e costumes alimentares ajudam a preservar a memória cultural.</p>
+                    <span class="book-page__status">Ainda não encontrada</span>
+                </article>
+                <article class="book-page" data-page="4">
+                    <h3>Segredos da natureza</h3>
+                    <p>Conhecer a biodiversidade também significa respeitar e proteger os seres vivos.</p>
+                    <span class="book-page__status">Ainda não encontrada</span>
+                </article>
+            </div>
+            <button class="button button--primary" id="btn-voltar-jogo" type="button">Voltar à aventura</button>
+        </section>
+
+        <!-- Quiz final -->
+        <section class="screen quiz-screen" id="tela-quiz" aria-labelledby="titulo-quiz" hidden>
+            <div class="section-heading">
+                <p class="section-eyebrow">Desafio final</p>
+                <h2 id="titulo-quiz">Teste seus conhecimentos</h2>
+                <p>Responda às perguntas para concluir sua jornada pela Sabedoria Popular.</p>
+            </div>
+            <div class="quiz-progress" aria-live="polite">
+                <span id="numero-pergunta">Pergunta 1 de 5</span>
+                <span id="pontuacao-quiz">Acertos: 0</span>
+            </div>
+            <form class="quiz-form" id="formulario-quiz">
+                <fieldset class="quiz-question">
+                    <legend id="pergunta-quiz">O que é um saber popular?</legend>
+                    <div class="quiz-options" id="alternativas-quiz">
+                        <!-- As alternativas serão inseridas pelo JavaScript. -->
+                    </div>
+                </fieldset>
+                <p class="quiz-feedback" id="feedback-quiz" role="status" aria-live="polite" hidden></p>
+                <div class="quiz-actions">
+                    <button class="button button--primary" id="btn-responder-quiz" type="submit">Confirmar resposta</button>
+                    <button class="button button--secondary" id="btn-proxima-pergunta" type="button" hidden>Próxima pergunta</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Encerramento -->
+        <section class="screen ending-screen" id="tela-final" aria-labelledby="titulo-final" hidden>
+            <div class="ending-screen__content">
+                <p class="section-eyebrow">Aventura concluída</p>
+                <h2 id="titulo-final">Você ajudou a preservar os saberes!</h2>
+                <p id="mensagem-final">Parabéns por explorar a comunidade, aprender com seus moradores e valorizar a cultura e a natureza.</p>
+                <div class="ending-screen__results">
+                    <p>Pontuação final: <strong id="pontuacao-final">0</strong></p>
+                    <p>Acertos no quiz: <strong id="acertos-finais">0 de 5</strong></p>
+                </div>
+                <button class="button button--primary" id="btn-jogar-novamente" type="button">Jogar novamente</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="rodape">
+        <p>Sabedoria Popular: O Segredo dos Antigos</p>
+        <p class="site-footer__note">Projeto educativo sobre cultura, sustentabilidade e saberes tradicionais.</p>
+    </footer>
+
+    <!-- Janela de ajuda complementar -->
+    <dialog class="help-dialog" id="dialogo-ajuda" aria-labelledby="titulo-ajuda">
+        <div class="help-dialog__content">
+            <h2 id="titulo-ajuda">Como jogar</h2>
+            <p>Use as setas do teclado ou as teclas W, A, S e D para se movimentar. Aperte Espaço perto de moradores e objetos para interagir. Converse com os moradores, cumpra as missões e reúna as quatro páginas do Livro dos Saberes.</p>
+            <p>Quando encontrar todas as páginas, você poderá fazer o quiz final.</p>
+            <button class="button button--primary" id="btn-fechar-ajuda" type="button">Entendi</button>
+        </div>
+    </dialog>
+</body>
+</html>

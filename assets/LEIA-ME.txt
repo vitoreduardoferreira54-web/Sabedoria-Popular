@@ -1,0 +1,20 @@
+SABEDORIA POPULAR — ASSETS PARA SCRATCH
+
+Conteúdo:
+- fundos/: cenários e exemplos de telas em pixel art.
+- personagens/jogador_parado/: poses de referência do jogador.
+- personagens/jogador_andando/: quadros de movimento.
+- personagens/jogador_correndo/: quadros de corrida.
+- personagens/jogador_acoes/: poses de ações especiais.
+- personagens/npcs/: personagens da comunidade.
+- personagens/animais/: animais e elementos da natureza.
+- objetos/: prancha de itens para recortar.
+- pranchas_originais/: pranchas completas para referência visual.
+
+Dica de uso no Scratch:
+1. Abra o Scratch e crie ou selecione um ator.
+2. Em Fantasias, escolha “Enviar fantasia” e selecione um PNG.
+3. Para animar, importe os frames de uma mesma pasta como fantasias do mesmo ator e alterne entre elas com o bloco “próxima fantasia”.
+4. Importe imagens de fundos pela aba Cenários.
+
+Observação: os PNGs dos personagens são recortes aproximados de uma prancha pixel-art; confira o enquadramento antes de usar. Os exemplos de tela são referências visuais e podem conter texto decorativo.
