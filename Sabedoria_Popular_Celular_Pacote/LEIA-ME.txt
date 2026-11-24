@@ -1,0 +1,16 @@
+SABEDORIA POPULAR: O SEGREDO DOS ANTIGOS - versão para celular e computador
+
+COMO JOGAR NO CELULAR
+- Joystick (esquerda): arraste para andar.
+- Botão de ação (direita): conversa, examina objetos e avança os diálogos (tocar no texto também avança).
+- Botões do topo: missão, Livro dos Saberes, som, ajuda e tela cheia.
+- Gire o celular (deitado) para jogar com mais espaço.
+
+COMO COLOCAR NO CELULAR
+Opção 1 (mais fácil): use o arquivo Sabedoria_Popular_Celular.html. Envie para o celular e abra no Chrome ou Safari.
+Opção 2 (como aplicativo, até offline): publique esta pasta em um site com https (por exemplo GitHub Pages, Netlify ou Vercel), abra o endereço no celular e use "Adicionar à tela inicial".
+
+NO COMPUTADOR
+Abra o index.html. Setas ou W A S D andam; Espaço ou Enter interage.
+
+Arquivos: index.html, style.css, script.js, sw.js (modo offline), manifest.webmanifest e a pasta assets.
